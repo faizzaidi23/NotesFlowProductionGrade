@@ -19,7 +19,7 @@ data class Folder(
         ForeignKey(
             entity=Folder::class,
             parentColumns = ["folderId"],
-            childColumns = ["id"],
+            childColumns = ["folderId"],
             onDelete=ForeignKey.CASCADE
         )
     ]
@@ -27,6 +27,7 @@ data class Folder(
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val folderId: Int,
     val title: String,
     val content: String,
     val createdDate:Date = Date(System.currentTimeMillis()),
@@ -51,13 +52,13 @@ data class Tag(
         ForeignKey(
             entity = Note::class,
             parentColumns = ["id"],
-            childColumns = ["tagId"],
+            childColumns = ["id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Tag::class,
             parentColumns = ["tagId"],
-            childColumns = ["id"],
+            childColumns = ["tagId"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -74,7 +75,7 @@ data class NoteTagCrossRef(
         ForeignKey(
             entity=Note::class,
             parentColumns = ["id"],
-            childColumns = ["mediaId"],
+            childColumns = ["noteId"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -82,6 +83,7 @@ data class NoteTagCrossRef(
 data class Media(
     @PrimaryKey(autoGenerate = true)
     val mediaId: Int,
+    val noteId: Int,
     val mediaType: String,
     val filePath: String,
     val createdDate: Date = Date(System.currentTimeMillis())
