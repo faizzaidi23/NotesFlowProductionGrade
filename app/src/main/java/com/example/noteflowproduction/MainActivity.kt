@@ -45,8 +45,3 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
-
-@Composable
-fun addTwoNumbers(){
-    println("this is a funciton ")
-}
