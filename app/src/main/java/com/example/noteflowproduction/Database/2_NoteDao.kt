@@ -26,5 +26,5 @@ interface NoteDao{
     @Query("select * from notes where id = :id")
     suspend fun getNoteById(id: Int): Note?
 
-    @Query("select * from notes order by ")
+    @Query("select * from notes order by folderId")
 }
