@@ -27,4 +27,12 @@ interface NoteDao{
     suspend fun getNoteById(id: Int): Note?
 
     @Query("select * from notes order by folderId")
+    suspend fun getNoteByFolderId(folderId:Int):Note?
+
+
+    //selecting all notes from a particular tag
+    @Query(
+        "select notes.* From notes inner join note_tag_cross_ref on notes.id = note_tag_cross_ref.id where note_tag_cross_ref.tagId = :tagId"
+    )
+    fun getNotesForTag(tagId:Int):Flow<List<Note>>
 }
