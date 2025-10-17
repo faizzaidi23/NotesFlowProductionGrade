@@ -1,7 +1,10 @@
 package com.example.noteflowproduction.Database
 
 import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 @Dao
 interface TagDao{
@@ -16,4 +19,13 @@ interface TagDao{
         where note_tag_cross_ref.id = :noteId
     """)
     fun getTagsForNote(noteId: Int):Flow<List<Tag>>
+
+    @Insert
+    suspend fun addTag(tag: Tag)
+
+    @Update
+    suspend fun updateTag(tag: Tag)
+
+    @Delete
+    suspend fun deleteTag(tag: Tag)
 }
