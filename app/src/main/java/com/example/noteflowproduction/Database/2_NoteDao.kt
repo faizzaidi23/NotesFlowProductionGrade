@@ -26,8 +26,8 @@ interface NoteDao{
     @Query("select * from notes where id = :id")
     suspend fun getNoteById(id: Int): Note?
 
-    @Query("select * from notes order by folderId")
-    suspend fun getNoteByFolderId(folderId:Int):Note?
+    @Query("select * from notes where folderId = :folderId order by createdDate")
+    suspend fun getNoteByFolderId(folderId:Int):Flow<List<Note>>
 
 
     //selecting all notes from a particular tag
