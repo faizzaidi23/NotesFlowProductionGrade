@@ -8,6 +8,16 @@ import java.sql.Date
 
 //Adding type converters for Color and dates
 
+/*
+Room storage limits:room only knows how to persist primitives and a few standard types
+Color and Date are not supported with fail with Cannot figure out how to save this field
+
+Color is a UI type. Converting it to an ARGB Int makes it storable and portable, so tag colors survive app restarts and migrations
+
+Data becomes a long That lets us sort and filter date efficiently e.g the order by createdDate (queries) because it is stored as an integer
+
+*/
+
 class Converters{
 
     @TypeConverter
