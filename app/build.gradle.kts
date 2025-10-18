@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.ksp)
     // add the kotlinx serialization plugin to handle the json data
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.21"
+    id("com.google.dagger.hilt.android") version "2.48" apply false
 }
 
 android {
@@ -80,4 +81,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.48")
+    ksp("com.google.dagger:hilt-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 }
