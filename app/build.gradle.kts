@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.expensecalculator"
+    namespace = "com.example.noteflowproduction"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.expensecalculator"
+        applicationId = "com.example.noteflowproduction"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
