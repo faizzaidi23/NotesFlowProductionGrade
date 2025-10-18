@@ -23,5 +23,4 @@ interface ReminderRepository{
     //To delete a reminder
     suspend fun deleteReminder(reminder: Reminder)
 
-
 }
