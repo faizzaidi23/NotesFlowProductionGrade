@@ -18,6 +18,7 @@ materialIcons = "1.6.8"
 junit = "4.13.2"
 androidxJunit = "1.1.5"
 espresso = "3.5.1"
+protoliteWellKnownTypes = "18.0.1"
 
 [libraries]
 # AndroidX Core
@@ -48,6 +49,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -63,6 +63,7 @@ dependencies {
 
     // Room Database
     implementation(libs.bundles.androidx.room)
+    implementation(libs.protolite.well.known.types)
     ksp(libs.androidx.room.compiler)
 
     //----Additions for networking
