@@ -15,16 +15,16 @@ interface tagRepository{
 
 
     //to get all tags for a note
-    fun getAllTagsFroNote(noteId: Int):Flow<List<Tag>>
+    fun getAllTagsForNote(noteId: Int):Flow<List<Tag>>
 
     //to add a tag
-    suspend fun addTag(tagId: Int)
+    suspend fun addTag(tagId: Tag)
 
     //to update a tag
-    suspend fun updateTag(tagId: Int)
+    suspend fun updateTag(tagId: Tag)
 
     //to delete a tag
-    suspend fun deleteTag(tagId: Int)
+    suspend fun deleteTag(tagId: Tag)
 
 
 }
