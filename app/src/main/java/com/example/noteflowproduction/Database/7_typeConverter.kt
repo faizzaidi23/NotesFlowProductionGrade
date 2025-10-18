@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowInsetsCompat
 import androidx.room.TypeConverter
-import java.util.Date
+import java.sql.Date
 
 //Adding type converters for Color and dates
 
