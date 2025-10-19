@@ -8,7 +8,6 @@ class NoteRepositoryImplementation(private val noteDao:NoteDao){
 
     fun getAllNotes():Flow<List<Note>> = noteDao.showAllNotes()
 
-
     //Adding a new note
     suspend fun addNote(note: Note){
         noteDao.addNote(note=note)
