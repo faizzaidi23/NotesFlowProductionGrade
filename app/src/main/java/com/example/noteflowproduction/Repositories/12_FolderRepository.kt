@@ -3,7 +3,7 @@ package com.example.noteflowproduction.Repositories
 import com.example.noteflowproduction.Database.Folder
 import kotlinx.coroutines.flow.Flow
 
-interface folderRepository{
+interface FolderRepository{
 
     //To get all the folders
     fun getAllFolders():Flow<List<Folder>>
