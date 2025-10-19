@@ -26,8 +26,13 @@ interface NoteDao{
     @Query("select * from notes where id = :id")
     suspend fun getNoteById(id: Int): Note?
 
+    /*
+    We do not have to use suspend keyword.
+    A dao method that returns Flow should be a regular function Room provides the reactive stream and runs queries off the main thread
+    We use suspend function only for one shot calls that return a value
+    */
     @Query("select * from notes where folderId = :folderId order by createdDate")
-    suspend fun getNoteByFolderId(folderId:Int):Flow<List<Note>>
+    fun getNoteByFolderId(folderId:Int):Flow<List<Note>>
 
 
     //selecting all notes from a particular tag
