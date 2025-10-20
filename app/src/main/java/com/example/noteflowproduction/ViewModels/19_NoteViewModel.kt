@@ -1,0 +1,7 @@
+package com.example.noteflowproduction.ViewModels
+
+import com.example.noteflowproduction.RepositoryImplementation.NoteRepositoryImplementation
+
+class NoteViewModel(private val noteRepositoryImplementation: NoteRepositoryImplementation){
+
+}
