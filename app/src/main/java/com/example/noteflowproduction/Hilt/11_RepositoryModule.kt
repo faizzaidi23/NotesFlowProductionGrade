@@ -2,6 +2,7 @@ package com.example.noteflowproduction.Hilt
 
 import com.example.noteflowproduction.Database.FolderDao
 import com.example.noteflowproduction.Database.NoteDao
+import com.example.noteflowproduction.Database.NoteTagCrossRefDao
 import com.example.noteflowproduction.Database.ReminderDao
 import com.example.noteflowproduction.Database.TagDao
 import com.example.noteflowproduction.Repositories.FolderRepository
@@ -42,8 +43,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTagRepository(tagDao: TagDao, noteDao: NoteDao): tagRepository {
-        return TagRepositoryImplementation(tagDao, noteDao)
+    fun provideTagRepository(
+        tagDao: TagDao,
+        noteDao: NoteDao,
+        noteTagCrossRefDao: NoteTagCrossRefDao
+    ): tagRepository {
+        return TagRepositoryImplementation(tagDao, noteDao, noteTagCrossRefDao)
     }
 
     @Provides
@@ -52,4 +57,3 @@ object RepositoryModule {
         return ReminderRepositoryImplementation(reminderDao)
     }
 }
-
