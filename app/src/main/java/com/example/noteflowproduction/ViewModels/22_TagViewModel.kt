@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteflowproduction.Database.Note
 import com.example.noteflowproduction.Database.Tag
-import com.example.noteflowproduction.Repositories.tagRepository
+import com.example.noteflowproduction.RepositoryImplementation.TagRepositoryImplementation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +22,7 @@ and the UI jetpack compose ensuring the UI always displays the current, correct 
 
 @HiltViewModel
 class TagViewModel @Inject constructor(
-    private val tagRepository: tagRepository
+    private val tagRepository: TagRepositoryImplementation
 ) : ViewModel() {
 
 
@@ -101,5 +101,33 @@ class TagViewModel @Inject constructor(
 
     fun clearSelectedTag() {
         _selectedTag.value = null
+    }
+
+
+    fun addTagToNote(noteId: Int, tagId: Int) {
+        viewModelScope.launch {
+            tagRepository.addTagToNote(noteId, tagId)
+        }
+    }
+
+
+    fun removeTagFromNote(noteId: Int, tagId: Int) {
+        viewModelScope.launch {
+            tagRepository.removeTagFromNote(noteId, tagId)
+        }
+    }
+
+
+    fun clearTagsForNote(noteId: Int) {
+        viewModelScope.launch {
+            tagRepository.clearTagsForNote(noteId)
+        }
+    }
+
+
+    fun clearNotesForTag(tagId: Int) {
+        viewModelScope.launch {
+            tagRepository.clearNotesForTag(tagId)
+        }
     }
 }
