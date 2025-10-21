@@ -21,27 +21,27 @@ fun AppNavHost(
 
         //For home screen
       composable(
-          Screen.HomeScreen.route
+          route=Screen.HomeScreen.route
       ){
 
       }
 
 
         //Editor Screen
-      composable(Screen.EditorScreen.route){
+      composable(route=Screen.EditorScreen.route){
 
       }
 
         //NoteDetail Screen
         composable(
-            Screen.NoteDetailScreen.route
+           route= Screen.NoteDetailScreen.route
         ){
 
         }
 
         //Folder Screen
         composable(
-            Screen.FolderScreen.route
+           route= Screen.FolderScreen.route
         ){
 
         }
@@ -49,7 +49,7 @@ fun AppNavHost(
         //Tag Screen
 
         composable(
-            Screen.TagScreen.route
+           route= Screen.TagScreen.route
         ) {
 
         }
@@ -57,7 +57,7 @@ fun AppNavHost(
         //Search Screen
 
         composable(
-            Screen.SearchScreen.route
+          route=  Screen.SearchScreen.route
         ) {
 
         }
