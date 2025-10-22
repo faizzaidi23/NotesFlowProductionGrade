@@ -1,6 +1,8 @@
 package com.example.noteflowproduction.UserInterface
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -25,5 +27,11 @@ fun HomeScreen(navController: NavController){
 
             )
         }
-    ) {  }
+    ) { internalPadding->
+        Column(
+            modifier=Modifier.padding(internalPadding)
+        ){
+
+        }
+    }
 }
