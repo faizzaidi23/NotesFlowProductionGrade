@@ -22,8 +22,7 @@ fun HomeScreen(navController: NavController){
         topBar = {
             TopAppBar(
                 title={Text(text="NotesFlow",fontWeight=FontWeight.ExtraBold,fontSize=36.sp)},
-                modifier=Modifier.fillMaxSize(),
-                navigationIcon = R.drawad
+                modifier=Modifier.fillMaxSize()
 
             )
         }
