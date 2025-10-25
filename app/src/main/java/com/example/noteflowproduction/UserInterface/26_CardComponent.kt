@@ -31,6 +31,7 @@ fun NoteCardComponent(
     navigateToNoteDetail: (noteId: Int) -> Unit
 ) {
     Card(
+        onClick = {navigateToNoteDetail},
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
