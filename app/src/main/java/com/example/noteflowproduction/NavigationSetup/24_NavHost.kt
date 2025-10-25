@@ -6,12 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.noteflowproduction.UserInterface.HomeScreen
+import com.example.noteflowproduction.ViewModels.NoteViewModel
 
 @Composable
 fun AppNavHost(
     modifier:Modifier= Modifier,
     navController: NavHostController= rememberNavController(),
-    startDestination:String= Screen.HomeScreen.route
+    startDestination:String= Screen.HomeScreen.route,
+    noteViewModel: NoteViewModel,
+
 ){
     NavHost(
         modifier=modifier,
@@ -23,7 +27,7 @@ fun AppNavHost(
       composable(
           route=Screen.HomeScreen.route
       ){
-
+          HomeScreen(navController=navController, viewModel = noteViewModel)
       }
 
 
