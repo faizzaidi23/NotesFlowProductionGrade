@@ -24,19 +24,18 @@ class NoteViewModel @Inject constructor(
     private val noteRepository: NoteRepository
 ) : ViewModel() {
 
-    // State for all notes---like when we want to have all the notes
+
     private val _allNotes = MutableStateFlow<List<Note>>(emptyList())
     val allNotes: StateFlow<List<Note>> = _allNotes.asStateFlow()
 
-    //For one  selected note
+
     private val _selectedNote = MutableStateFlow<Note?>(null)
     val selectedNote: StateFlow<Note?> = _selectedNote.asStateFlow()
 
-    // Notes by Folder
     private val _notesByFolder = MutableStateFlow<List<Note>>(emptyList())
     val notesByFolder: StateFlow<List<Note>> = _notesByFolder.asStateFlow()
 
-    //Notes by tag
+
     private val _notesByTag = MutableStateFlow<List<Note>>(emptyList())
     val notesByTag: StateFlow<List<Note>> = _notesByTag.asStateFlow()
 
@@ -44,7 +43,6 @@ class NoteViewModel @Inject constructor(
         loadAllNotes()
     }
 
-    // Load all notes--> This function loads all the notes when we  just open the app
     private fun loadAllNotes() {
         viewModelScope.launch {
             noteRepository.getAllNotes().collect { notes ->
@@ -53,28 +51,28 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    // Add a new note
+
     fun addNote(note: Note) {
         viewModelScope.launch {
             noteRepository.addNote(note)
         }
     }
 
-    // Update an existing note
+
     fun updateNote(note: Note) {
         viewModelScope.launch {
             noteRepository.updateNote(note)
         }
     }
 
-    // Delete a note
+
     fun deleteNote(note: Note) {
         viewModelScope.launch {
             noteRepository.deleteNote(note)
         }
     }
 
-    // Get a note by ID
+
     fun getNoteById(id: Int) {
         viewModelScope.launch {
             val note = noteRepository.getNoteById(id)
@@ -82,7 +80,7 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    // Get notes by folder
+
     fun getNotesByFolder(folderId: Int) {
         viewModelScope.launch {
             noteRepository.getNotesByFolder(folderId).collect { notes ->
@@ -91,7 +89,8 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    // Get notes by tag
+
+
     fun getNotesByTag(tagId: Int) {
         viewModelScope.launch {
             noteRepository.getNotesByTag(tagId).collect { notes ->
@@ -100,7 +99,7 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    // Clear selected note
+
     fun clearSelectedNote() {
         _selectedNote.value = null
     }
