@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -60,7 +61,7 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
         }
     ){internalPadding->
         Column(
-            modifier=Modifier.padding(internalPadding).fillMaxSize()
+            modifier=Modifier.padding(internalPadding).fillMaxSize().padding(16.dp)
         ){
             //Time
             Text(
@@ -70,11 +71,28 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
             Spacer(Modifier.height(15.dp))
 
             TextField(
-                value = selectedNote,
-                onValueChange =
+                value = selectedNote?.title ?: "",
+                onValueChange = { newTitle ->
+                    selectedNote?.let { note ->
+                        viewModel.updateNote(note.copy(title = newTitle))
+                    }
+                },
+                label = { Text("Title") },
+                modifier = Modifier.fillMaxWidth()
             )
 
+            Spacer(Modifier.height(15.dp))
 
+            TextField(
+                value = selectedNote?.content ?: "",
+                onValueChange = { newContent ->
+                    selectedNote?.let { note ->
+                        viewModel.updateNote(note.copy(content = newContent))
+                    }
+                },
+                label = { Text("Content") },
+                modifier = Modifier.fillMaxWidth().weight(1f)
+            )
         }
 
     }
