@@ -73,7 +73,7 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
             TextField(
                 value = selectedNote?.title ?: "",
                 onValueChange = { newTitle ->
-                    selectedNote?.let { note ->
+                    selectedNote?.let { note -> // we use let when we want to run code only when a nullable value is non null and get a non nullable local reference inside the block
                         viewModel.updateNote(note.copy(title = newTitle))
                     }
                 },
