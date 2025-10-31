@@ -3,10 +3,13 @@ package com.example.noteflowproduction.NavigationSetup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.noteflowproduction.UserInterface.HomeScreen
+import com.example.noteflowproduction.UserInterface.NoteDetailScreen
 import com.example.noteflowproduction.ViewModels.NoteViewModel
 
 @Composable
@@ -38,9 +41,17 @@ fun AppNavHost(
 
         //NoteDetail Screen
         composable(
-           route= Screen.NoteDetailScreen.route
-        ){
-
+           route= "detail/{noteId}",
+            arguments = listOf(
+                navArgument("noteId") { type = NavType.IntType }
+            )
+        ){backStackEntry ->
+            val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
+            NoteDetailScreen(
+                noteId = noteId,
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = noteViewModel
+            )
         }
 
         //Folder Screen

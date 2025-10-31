@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -30,6 +33,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.noteflowproduction.NavigationSetup.Screen
 import com.example.noteflowproduction.ViewModels.NoteViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
+
+fun formatDate(date: java.sql.Date): String {
+    val formatter = SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault())
+    return formatter.format(date)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,8 +66,31 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
                     ){
                         Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Navigate back to the home screen")
                     }
+                },
+                actions = {
+                    IconButton(
+                        onClick = {
+                            selectedNote?.let { note ->
+                                viewModel.deleteNote(note)
+                                onNavigateBack()
+                            }
+                        }
+                    ) {
+                        Icon(Icons.Default.Delete, contentDescription = "Delete Note")
+                    }
                 }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    selectedNote?.let { note ->
+                        viewModel.updateNote(note)
+                    }
+                }
+            ) {
+                Icon(Icons.Default.Save, contentDescription = "Save Note")
+            }
         }
     ){internalPadding->
         Column(
@@ -65,7 +98,7 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
         ){
             //Time
             Text(
-                text="Created At: ${selectedNote?.createdDate}"
+                text="Created At: ${selectedNote?.createdDate?.let { formatDate(it) } ?: "Unknown"}"
             )
 
             Spacer(Modifier.height(15.dp))
@@ -73,7 +106,7 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
             TextField(
                 value = selectedNote?.title ?: "",
                 onValueChange = { newTitle ->
-                    selectedNote?.let { note -> // we use let when we want to run code only when a nullable value is non null and get a non nullable local reference inside the block
+                    selectedNote?.let { note ->
                         viewModel.updateNote(note.copy(title = newTitle))
                     }
                 },
@@ -91,7 +124,9 @@ fun NoteDetailScreen(noteId: Int,onNavigateBack:()-> Unit,viewModel: NoteViewMod
                     }
                 },
                 label = { Text("Content") },
-                modifier = Modifier.fillMaxWidth().weight(1f)
+                modifier = Modifier.fillMaxWidth().weight(1f),
+                maxLines = Int.MAX_VALUE,
+                singleLine = false
             )
         }
 

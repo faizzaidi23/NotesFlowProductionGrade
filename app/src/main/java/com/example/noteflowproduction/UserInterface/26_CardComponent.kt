@@ -24,42 +24,45 @@ import java.util.Locale
 
 @Composable
 fun NoteCardComponent(
+    noteId: Int,
     title: String,
     content: String,
-    image: String?,
     createdDate: Date?,
     navigateToNoteDetail: (noteId: Int) -> Unit
 ) {
     Card(
-        onClick = {navigateToNoteDetail},
+        onClick = { navigateToNoteDetail(noteId) },
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
-            .padding(8.dp),
+            .height(200.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
 
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceAround
+            modifier = Modifier.fillMaxSize().padding(12.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
 
 
             Text(text = title, fontSize = 16.sp, fontWeight = FontWeight.Bold)
 
 
-            Text(text = content, fontSize = 14.sp)
+            Text(
+                text = content,
+                fontSize = 14.sp,
+                maxLines = 4
+            )
 
 
             val formattedDate = if (createdDate != null) {
-                SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault()).format(createdDate)
+                SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(createdDate)
             } else {
                 "Unknown"
             }
 
             val annotated = buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold, fontSize = 12.sp)) {
-                    append("Created At: ")
+                    append("Created: ")
                 }
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, fontSize = 12.sp, color = Color.Gray)) {
                     append(formattedDate)
